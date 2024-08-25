@@ -1,0 +1,33 @@
+// Create a new Google Form
+var form = FormApp.getActiveForm();
+
+// Create validation for exactly 10 digits
+var phoneValidation = FormApp.createTextValidation()
+  .setHelpText('Please enter a valid 10-digit phone number (digits only).')
+  .requireTextMatchesPattern('^\\d{10}$')
+  .build();
+
+function createFormSections() {
+ 
+  form.addPageBreakItem().setTitle('Team Member Details');
+  createSection(1);
+
+  form.addPageBreakItem().setTitle('Team Member Details');
+  createSection(2);
+
+  form.addPageBreakItem().setTitle('Team Member Details');
+  createSection(3);
+
+  form.addPageBreakItem().setTitle('Team Member Details');
+  createSection(4);
+
+}
+
+function createSection(number){
+  for(var i=0; i<number; i++){
+    form.addSectionHeaderItem().setTitle('Team Member '+ (i+1));
+    form.addTextItem().setTitle('Name').setRequired(true);
+    form.addTextItem().setTitle('Email').setRequired(true);
+    form.addTextItem().setTitle('Phone Number').setValidation(phoneValidation).setRequired(true);
+  }
+}
